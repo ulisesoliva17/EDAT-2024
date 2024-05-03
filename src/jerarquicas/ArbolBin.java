@@ -346,6 +346,7 @@ private void fronteraAux(Lista lis, NodoArbol nodo){
                
        }
    }
+   
    public Lista armarListaInOrden(Object x){
        NodoArbol buscado= obtenerNodito(raiz, x);
        Lista lis= new Lista();

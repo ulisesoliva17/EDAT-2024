@@ -245,6 +245,34 @@ public static Lista invertirVocales(Cola c1){
     }
     return lis;
 }
+public static Cola generarSecuenciaaa(Cola c1){
+    Pila pilita= new Pila();
+    Cola retorno= new Cola();
+    Cola aux= new Cola();
+    while(!c1.esVacia()){
+        while(!c1.esVacia() && !c1.obtenerFrente().equals('#')){
+            retorno.poner(c1.obtenerFrente());
+            pilita.apilar(c1.obtenerFrente());
+            aux.poner(c1.obtenerFrente());
+            c1.sacar();
+        }
+        while(!pilita.esVacia()){
+            retorno.poner(pilita.obtenerTope());
+            pilita.desapilar();
+        }
+        while(!aux.esVacia()){
+            retorno.poner(aux.obtenerFrente());
+            aux.sacar();
+        }
+         if(!c1.esVacia()){
+            retorno.poner('#');
+        }
+        if(!c1.esVacia()){
+            c1.sacar();
+        }
+    }
+    return retorno;
+}
 
     
    public static void main(String[] args) {
@@ -289,9 +317,9 @@ public static Lista invertirVocales(Cola c1){
         c1.poner('e');
         c1.poner('h');
         c1.poner('y');
-        System.out.println("Cola original "+c1.toString());
-        Lista list= new Lista();
-        list=invertirVocales(c1);
-        System.out.println(list.toString());
+       Cola col= new Cola();
+       System.out.println(c1.toString());
+       col = generarSecuenciaaa(c1);
+       System.out.println(col.toString());
     }
 }

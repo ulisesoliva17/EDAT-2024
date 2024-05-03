@@ -293,4 +293,66 @@ public class Lista {
             cabecera=nuevo;
         }
     }
+    public void eliminarRepetidos(){
+        Nodo aux1=cabecera;
+        Nodo aux2=cabecera;
+        Nodo aux3=aux2;
+        while(aux1!=null){
+            while(aux2!=null){
+                aux3=aux2;
+                aux2=aux2.getEnlace();
+                if(aux1!=null && aux2!=null && aux3!=null && aux1.getElem().equals(aux2.getElem())){
+                    aux3.setEnlace(aux2.getEnlace());
+                }
+            }
+            aux1=aux1.getEnlace();
+            aux2=aux1;
+            aux3=aux2;
+        }
+    }
+    public void eliminarImpares(){
+        Nodo aux1= cabecera;
+        Nodo aux2= aux1;
+        while(aux1!=null && (int)aux1.getElem()%2!=0 ){
+            cabecera= cabecera.getEnlace();
+            aux1=cabecera;
+        }
+        while(aux1!=null){
+            if( (int)aux1.getElem()%2!=0 ){
+                aux2.setEnlace(aux1.getEnlace());
+            }
+            aux2=aux1;
+            aux1=aux1.getEnlace();
+        }
+    }
+    public boolean esCapicua(){
+        Nodo aux1= cabecera;
+        Nodo aux2= new Nodo(null,null);
+        int longi= this.longitud();
+        boolean rta=true;
+        int i=0;
+        int contador=1;
+        while(aux1!=null && aux2!=null && rta && aux1!=aux2){
+            aux2=cabecera;
+            while(contador!=(longi-i)&& aux1!=aux2){
+                aux2=aux2.getEnlace();
+                contador++;
+            }
+            if(aux1!= null && aux2!=null &&  aux1.getElem().equals(aux2.getElem())&& aux1!=aux2){
+                rta=true;
+                aux1=aux1.getEnlace();
+                i++;
+                contador=1;
+            }else{
+                rta=false;
+            }
+        }
+        if(rta && aux1==aux2){
+            rta=true;
+        }else{
+            rta=false;
+        }
+        return rta;
+    }
+
 }
