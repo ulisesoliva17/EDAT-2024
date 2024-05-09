@@ -1,5 +1,5 @@
 
-package testt;
+package testJerarquicas;
 import jerarquicas.ArbolBin;
 import lineales.dinamicas.Lista;
 
