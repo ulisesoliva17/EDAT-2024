@@ -511,4 +511,130 @@ public class ArbolBB {
         clonarInvertido(original, nuevo.raiz);
         return nuevo;
     }
+    public Comparable mejorCandidatoPublico(Comparable elem){
+        Comparable retorno=-1;
+        NodoABB ret= mejorCandidato2(raiz, elem);
+        if(ret==null){
+            retorno=0;
+        }else{
+            retorno = ret.getElem();
+        }
+        return retorno;
+    }
+    private NodoABB mejorCandidato2(NodoABB aux,Comparable elem){
+        NodoABB mejorCandi=null;
+        if(aux!=null){
+            if(elem.compareTo(aux.getElem())==0){
+                if(aux.getIzquierdo()!=null && aux.getDerecho()!=null){
+                    NodoABB canIzq= aux.getIzquierdo();
+                    NodoABB canDer= aux.getDerecho();
+                    while(canIzq.getDerecho()!=null){
+                        canIzq=canIzq.getDerecho();
+                    }
+                    while(canDer.getIzquierdo()!=null){
+                        canDer=canDer.getIzquierdo();
+                    }
+                    Comparable canD= canDer.getElem();
+                    Comparable canI= canIzq.getElem();
+                    Comparable ele= aux.getElem();
+                    //Diferencia entre canI y ele
+                    int diffCanIEle = (int) ele - (int)canI;
+                    //Diferencia entre canD y ele
+                    int diffCanDEle = (int)canD- (int)ele;
+
+                    if (diffCanIEle<diffCanDEle) {
+                        System.out.println(diffCanIEle);
+                        mejorCandi= canIzq;
+                    } else {
+                        System.out.println(diffCanDEle);
+                        mejorCandi= canDer;
+                    }
+                }else if(aux.getIzquierdo()==null && aux.getDerecho()!=null){
+                    NodoABB canDer= aux.getDerecho();
+                   while(canDer.getIzquierdo()!=null){
+                        canDer=canDer.getIzquierdo();
+                    }
+                   mejorCandi= canDer;
+                }else{
+                    NodoABB canIzq= aux.getIzquierdo();
+                    while(canIzq.getDerecho()!=null){
+                        canIzq=canIzq.getDerecho();
+                    }
+                    mejorCandi= canIzq;
+                }
+                
+            }else{
+                if(elem.compareTo(aux.getElem())<0){
+                    mejorCandi= mejorCandidato2(aux.getIzquierdo(), elem);
+                }
+                if(mejorCandi==null){
+                    if(elem.compareTo(aux.getElem())>0){
+                      mejorCandi= mejorCandidato2(aux.getDerecho(), elem);
+                    }
+                }
+            }
+        }
+        return mejorCandi;
+    }
+    public Comparable mejorCandidato(Comparable elem){
+        Comparable aux = mejorCandidatoAux(raiz, elem);
+        Comparable retorno;
+        if(aux==null){
+            retorno = 0;
+        }else{
+            retorno = aux;
+        }
+        return retorno;
+    }
+    private Comparable mejorCandidatoAux(NodoABB aux, Comparable elem){
+        Comparable retorno= null;
+        if(aux!=null){
+            if(aux.getElem().compareTo(elem)==0){
+                  if(aux.getIzquierdo()!=null && aux.getDerecho()!=null){
+                        NodoABB candiIzq= aux.getIzquierdo();
+                        NodoABB candiDer= aux.getDerecho();
+                        while(candiIzq.getDerecho()!=null){
+                            candiIzq= candiIzq.getDerecho();
+                        }
+                        while(candiDer.getIzquierdo()!=null){
+                            candiDer= candiDer.getIzquierdo();
+                        }
+                        int compIzq= (int) candiIzq.getElem();
+                        int compDer= (int) candiDer.getElem();
+                        int compElem= (int) elem;
+                        
+                        if((compElem - compIzq)<(compDer-compElem)){
+                            retorno = candiIzq.getElem();
+                        }else if((compElem - compIzq)>(compDer-compElem)){
+                            retorno = candiDer.getElem();
+                        }
+
+                    }else if(aux.getIzquierdo()!=null && aux.getDerecho()==null){
+                        NodoABB candiIzq= aux.getIzquierdo();
+                        while(candiIzq.getDerecho()!=null){
+                            candiIzq= candiIzq.getDerecho();
+                        }
+                            retorno = candiIzq.getElem();
+                    }else if(aux.getIzquierdo()==null && aux.getDerecho()!=null){
+                         NodoABB candiDer= aux.getDerecho();
+                         while(candiDer.getIzquierdo()!=null){
+                            candiDer= candiDer.getIzquierdo();
+                        }
+                         retorno = candiDer.getElem();
+                    }else if(aux.getIzquierdo()==null && aux.getDerecho()==null){
+                        retorno = -1;
+                    }
+            }else{
+                    if(elem.compareTo(aux.getElem())<0){
+                        retorno = mejorCandidatoAux(aux.getIzquierdo(), elem);
+                    }
+                    if(retorno == null){
+                        if(elem.compareTo(aux.getElem())>0){
+                        retorno = mejorCandidatoAux(aux.getDerecho(), elem);
+                        }
+                    }
+            }
+        }
+        return retorno;
+    }
 }

@@ -28,9 +28,9 @@ public class testArbolGenerico {
         arbolito.insertar(57, 8);
         arbolito.insertar(58, 8);
         System.out.println(arbolito.toString());
-        arbolito.eliminar(78);
         System.out.println("----------------------------------------");
-          System.out.println(arbolito.toString());
+        arbolito.insertarenPosicionPractica(4, 414, 2);
+        System.out.println(arbolito.toString());
         //System.out.println(arbolito.esSobrino(171, 2));
         
         /*System.out.println(arbolito.toString());
