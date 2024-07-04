@@ -28,7 +28,7 @@ public class testABB {
         arbol.insertar(53);
         arbol.insertar(67);
         System.out.println(arbol.toString());
-        System.out.println(arbol.mejorCandidato(16));
+        System.out.println(arbol.mejorCandidatoAgus(16));
        /* arbol.eliminar(9);
         System.out.println(arbol.toString());*/
         /*Lista lis = new Lista();

@@ -47,17 +47,12 @@ public class ArbolGen {
 
     private NodoGen obtenerNodo(NodoGen aux, Object buscado) {
         NodoGen retorno = null;
-        if (aux != null)
-        {
-            System.out.println("llama a obtenerNodo con " + aux.getElem());
-            if (aux.getElem().equals(buscado))
-            {
+        if (aux != null) {
+            if (aux.getElem().equals(buscado)) {
                 retorno = aux;
-            } else
-            {
+            } else{
                 NodoGen hijo = aux.getHijoIzquierdo();
-                while (hijo != null && retorno == null)
-                {
+                while (hijo != null && retorno == null){
                     retorno = obtenerNodo(hijo, buscado);
                     hijo = hijo.getHermanoDerecho();
                 }
@@ -73,24 +68,18 @@ public class ArbolGen {
         arr[0] = 1;
         boolean rta = false;
         NodoGen nuevo = new NodoGen(elemNuevo, null, null);
-        if (raiz == null)
-        {
+        if (raiz == null){
             raiz = nuevo;
             rta = true;
-        } else
-        {
+        }else{
             NodoGen padre = obtenerNodoPosicion(raiz, posPadre, arr);
-            if (padre != null)
-            {
-                if (padre.getHijoIzquierdo() == null)
-                {
+            if (padre != null){
+                if (padre.getHijoIzquierdo() == null){
                     padre.setHijoIzquierdo(nuevo);
                     rta = true;
-                } else
-                {
+                } else{
                     NodoGen hijo = padre.getHijoIzquierdo();
-                    while (hijo.getHermanoDerecho() != null)
-                    {
+                    while (hijo.getHermanoDerecho() != null){
                         hijo = hijo.getHermanoDerecho();
                     }
                     hijo.setHermanoDerecho(nuevo);
@@ -103,18 +92,14 @@ public class ArbolGen {
 
     private NodoGen obtenerNodoPosicion(NodoGen aux, int buscado, int[] contador) {
         NodoGen retorno = null;
-        if (aux != null)
-        {
-            if (buscado == contador[0])
-            {
+        if (aux != null){
+            if (buscado == contador[0]){
                 retorno = aux;
             }
 
-            if (aux.getHijoIzquierdo() != null && retorno == null)
-            {
+            if (aux.getHijoIzquierdo() != null && retorno == null){
                 NodoGen hijo = aux.getHijoIzquierdo();
-                while (hijo != null && retorno == null)
-                {
+                while (hijo != null && retorno == null){
                     contador[0] = contador[0] + 1;
                     retorno = obtenerNodoPosicion(hijo, buscado, contador);
                     hijo = hijo.getHermanoDerecho();
@@ -315,24 +300,20 @@ public class ArbolGen {
     }
 
     private int gradoArbolAux(NodoGen aux, int contador, int gradoMax) {
-        if (aux != null)
-        {
+        if (aux != null){
 
             NodoGen hijo = aux.getHijoIzquierdo();
-            while (hijo != null)
-            {
+            while (hijo != null){
                 contador++;
                 hijo = hijo.getHermanoDerecho();
             }
 
-            if (contador > gradoMax)
-            {
+            if (contador > gradoMax){
                 gradoMax = contador;
             }
 
             hijo = aux.getHijoIzquierdo();
-            while (hijo != null)
-            {
+            while (hijo != null){
                 gradoMax = gradoArbolAux(hijo, 0, gradoMax);
                 hijo = hijo.getHermanoDerecho();
             }
@@ -466,18 +447,14 @@ public class ArbolGen {
     private void listarEntreNivelesAux(NodoGen aux, int niv1, int niv2, int nivActual, Lista lis) {
         if (aux != null)
         {
-            if (nivActual <= niv2)
-            {
-                if (nivActual >= niv1)
-                {
+            if (nivActual <= niv2){
+                if (nivActual >= niv1) {
                     lis.insertar(lis.longitud() + 1, aux.getElem());
                 }
                 NodoGen hijo = aux.getHijoIzquierdo();
-                while (hijo != null)
-                {
+                while (hijo != null){
                     listarEntreNivelesAux(hijo, niv1, niv2, nivActual + 1, lis);
                     hijo = hijo.getHermanoDerecho();
-
                 }
             }
         }
@@ -542,8 +519,7 @@ public class ArbolGen {
             } else
             {
                 NodoGen hijo = aux.getHijoIzquierdo();
-                while (hijo != null && retorno == null)
-                {
+                while (hijo != null && retorno == null){
                     retorno = obtenerNodo2(hijo, elem);
                     hijo = hijo.getHermanoDerecho();
                 }
@@ -555,15 +531,12 @@ public class ArbolGen {
     private boolean insertarEnPosPracticaAux(NodoGen padre, Object elem, int pos) {
         boolean rta = false;
         NodoGen nuevo = new NodoGen(elem, null, null);
-        if (padre.getHijoIzquierdo() != null)
-        {
+        if (padre.getHijoIzquierdo() != null){
             NodoGen hijo = padre.getHijoIzquierdo();
             NodoGen anterior = null;
             int contador = 1;
-            if (pos != 1)
-            {
-                while (hijo != null && (contador != pos))
-                {
+            if (pos != 1){
+                while (hijo != null && (contador != pos)){
                     anterior = hijo;
                     hijo = hijo.getHermanoDerecho();
                     contador++;
@@ -571,14 +544,12 @@ public class ArbolGen {
                 anterior.setHermanoDerecho(nuevo);
                 nuevo.setHermanoDerecho(hijo);
                 rta = true;
-            } else
-            {
+            } else{
                 nuevo.setHermanoDerecho(hijo);
                 padre.setHijoIzquierdo(nuevo);
                 rta = true;
             }
-        } else
-        {
+        } else{
             padre.setHijoIzquierdo(nuevo);
             rta = true;
         }
@@ -589,11 +560,34 @@ public class ArbolGen {
 
         boolean rta = false;
         NodoGen padreAux = obtenerNodo2(raiz, padre);
-        if (padreAux != null)
-        {
+        if (padreAux != null){
             rta = insertarEnPosPracticaAux(padreAux, elem, pos);
         }
         return rta;
     }
-
+    
+private void repetirHEIAux(NodoGen aux){
+    if(aux.getHijoIzquierdo()!=null){
+        NodoGen hijo= aux.getHijoIzquierdo();
+        Object hijoOb= hijo.getElem();
+        boolean rta=false;
+        while(hijo.getHermanoDerecho()!=null && !rta){
+            hijo=hijo.getHermanoDerecho();
+            if(hijo.getElem().equals(hijoOb)){
+                rta=true;
+            }
+        }
+        if(hijo.getHermanoDerecho()==null && !rta){
+            NodoGen nuevo= new NodoGen(hijoOb,null,null);
+            hijo.setHermanoDerecho(nuevo);
+        }
+    }
+}
+    public void repetirHEI(Object a){
+        NodoGen aux= obtenerNodo(raiz, a);
+        if(aux!=null){
+            repetirHEIAux(aux);
+        }
+    }
+    
 }

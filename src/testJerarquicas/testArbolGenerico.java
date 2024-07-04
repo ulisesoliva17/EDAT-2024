@@ -9,7 +9,7 @@ public class testArbolGenerico {
     public static void main(String[] args) {
         
         // 
-        ArbolGen arbolito= new ArbolGen();
+        /*ArbolGen arbolito= new ArbolGen();
         arbolito.insertar(1, 1);
         arbolito.insertar(2, 1);
         arbolito.insertar(3, 1);
@@ -31,8 +31,22 @@ public class testArbolGenerico {
         System.out.println("----------------------------------------");
         arbolito.insertarenPosicionPractica(4, 414, 2);
         System.out.println(arbolito.toString());
-        //System.out.println(arbolito.esSobrino(171, 2));
-        
+        //System.out.println(arbolito.esSobrino(171, 2));*/
+        ArbolGen arbolito= new ArbolGen();
+        arbolito.insertar('r', null);
+        arbolito.insertar('v', 'r');
+        arbolito.insertar('b', 'r');
+        arbolito.insertar('u', 'v');
+        arbolito.insertar('w', 'v');
+        arbolito.insertar('w', 'v');
+        arbolito.insertar('p', 'u');
+        arbolito.insertar('x', 'w');
+        arbolito.insertar('y', 'w');
+        arbolito.insertar('z', 'w');
+        System.out.println(arbolito.toString());
+          System.out.println("----------------------------------------");
+        arbolito.repetirHEI('v');
+        System.out.println(arbolito.toString());
         /*System.out.println(arbolito.toString());
         System.out.println("----------------------------------------");
         arbolito.insertarEnPosicionHijo(999, 1, 1);
